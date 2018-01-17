@@ -16,8 +16,8 @@
             <Label DockPanel.Dock="Top">Number of Panels: </Label>
             <TextBox Name="nrOfStackPanels"/>
         </DockPanel>
-        <StackPanel Grid.Column="1" Name="HierGaatHetGebeuren" Background="#FF8FCB00">
+        <ScrollViewer Grid.Column="1" Name="HierGaatHetGebeuren" Background="#FF8FCB00" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Label>Hier Gaat Het Gebeuren</Label>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

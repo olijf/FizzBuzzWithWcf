@@ -35,7 +35,9 @@ namespace PerformanceTestProject
         {   
             random = new Random();
             InitializeComponent();
-            tempStack = HierGaatHetGebeuren;
+                var blah = new StackPanel();
+            HierGaatHetGebeuren.Content = blah;
+            tempStack = blah;
         }
         
         private StackPanel AddToStack(StackPanel addTo)
@@ -56,7 +58,10 @@ namespace PerformanceTestProject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            nrOfStacks++;
+            for (int i = 0; i < 20; i++)
+            {
+                nrOfStacks++;
+            }
             nrOfStackPanels.Text = string.Format("{0}",nrOfStacks);
         }
         public static string ByteArrayToString(byte[] ba)
