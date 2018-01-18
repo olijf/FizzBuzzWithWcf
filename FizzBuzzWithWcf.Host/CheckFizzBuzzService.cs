@@ -2,7 +2,8 @@
 
 namespace FizzBuzzWithWcf.Host
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+                ConcurrencyMode = ConcurrencyMode.Single)]
     public class CheckFizzBuzzService : IFizzBuzzCounter
     {
         private int Counter = 1;
