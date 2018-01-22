@@ -2,22 +2,31 @@
 
 namespace FizzBuzzWithWcf.Host
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
                 ConcurrencyMode = ConcurrencyMode.Single)]
     public class CheckFizzBuzzService : IFizzBuzzCounter
     {
-        private int Counter = 1;
+        //private int Counter = 1;
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void DecrementCounter()
         {
+            var Counter = 0;
+            var file = System.IO.File.ReadAllText("counter.txt");
+            int.TryParse(file, out Counter);
             if (Counter >= 2)
             {
                 Counter--;
             }
+            System.IO.File.WriteAllText("counter.txt", string.Format("{0}", Counter));
         }
+
 
         public string GetFizzBuzzLabel()
         {
+            var Counter = 0;
+            var file = System.IO.File.ReadAllText("counter.txt");
+            int.TryParse(file, out Counter);
             var result = string.Empty;
             if (Counter % 15 == 0)
             {
@@ -39,9 +48,22 @@ namespace FizzBuzzWithWcf.Host
             return result;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void IncrementCounter()
         {
+            var Counter = 0;
+            var file = System.IO.File.ReadAllText("counter.txt");
+            int.TryParse(file, out Counter);
             Counter++;
+            try
+            {
+
+                System.IO.File.WriteAllText("counter.txt", string.Format("{0}", Counter));
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine(e);
+            }
         }
     }
 }

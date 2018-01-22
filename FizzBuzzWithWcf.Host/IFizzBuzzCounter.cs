@@ -6,9 +6,11 @@ namespace FizzBuzzWithWcf.Host
     public interface IFizzBuzzCounter
     {
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
         void IncrementCounter();
 
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
         void DecrementCounter();
 
         [OperationContract]
